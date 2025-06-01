@@ -8,7 +8,7 @@
     <artifactId>gateway</artifactId>
     <version>0.0.1</version>
 
-    <name>config-service</name>
+    <name>gateway</name>
     <description>Gateway service for Boiz-Streaming project</description>
 
     <packaging>jar</packaging>
@@ -26,6 +26,11 @@
         <!-- Spring -->
         <spring.boot.version>3.2.4</spring.boot.version>
         <spring.cloud.version>2023.0.1</spring.cloud.version>
+
+        <!-- Jjwt -->
+        <jjwt-api.version>0.11.5</jjwt-api.version>
+        <jjwt-impl.version>0.11.5</jjwt-impl.version>
+        <jjwt-jackson.version>0.11.5</jjwt-jackson.version>
     </properties>
 
     <dependencyManagement>
@@ -37,6 +42,19 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.yaml</groupId>
+                        <artifactId>snakeyaml</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -44,7 +62,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
-            <version>${spring.boot.version}</version>
         </dependency> <!-- spring-boot-starter -->
 
         <dependency>
@@ -56,6 +73,41 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency> <!-- spring-cloud-starter-gateway -->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency> <!-- spring-boot-starter-security -->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency> <!-- spring-boot-starter-webflux -->
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency> <!-- lombok -->
+
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>${jjwt-api.version}</version>
+        </dependency> <!-- jjwt-api -->
+
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>${jjwt-impl.version}</version>
+            <scope>runtime</scope>
+        </dependency> <!-- jjwt-impl -->
+
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>${jjwt-jackson.version}</version>
+            <scope>runtime</scope>
+        </dependency> <!-- jjwt-jackson -->
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>
